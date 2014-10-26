@@ -1,8 +1,6 @@
 # Pull base image.
 FROM ubuntu:14.04
 
-VOLUME ["/azk/npm"]
-
 # Ignore APT warnings about not having a TTY
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -45,12 +43,9 @@ RUN \
   echo 'gem: --no-document' > /usr/local/etc/gemrc && \
   gem install bundler sass compass
 
-ENV PATH /azk/npm/bin:$PATH
-
 # Install Node.js
 RUN \
   apt-get install -y nodejs-legacy npm && \
-  npm config set prefix /azk/npm && \
   npm install -g yo generator-angular grunt-cli bower
 
 EXPOSE 9000
